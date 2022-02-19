@@ -10,5 +10,4 @@ class Post < ApplicationRecord
   def liked_by?(user)
     likes.any? { |like| like.user_id == user.id }
   end
-
 end

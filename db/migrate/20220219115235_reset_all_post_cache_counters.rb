@@ -3,6 +3,5 @@ class ResetAllPostCacheCounters < ActiveRecord::Migration[6.1]
     Post.find_each { |post| Post.reset_counters(post.id, :likes_count) }
   end
 
-  def down
-  end
+  def down; end
 end
