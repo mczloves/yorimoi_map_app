@@ -12,9 +12,10 @@ class PostsController < ApplicationController
   def create
     post = current_user.posts.new(post_params)
     if post.save
-      redirect_to post
+      redirect_to post, notice: "投稿しました"
     else
-      render new_posts_path
+      flash.now[:alert] = "投稿に失敗しました"
+      render :new
     end
   end
 
@@ -25,13 +26,17 @@ class PostsController < ApplicationController
   def edit; end
 
   def update
-    @post.update!(post_params)
-    redirect_to @post
+    if @post.update(post_params)
+      redirect_to @post, notice: "更新しました"
+    else
+      flash.now[:alert] = "更新に失敗しました"
+      render :edit
+    end
   end
 
   def destroy
     @post.destroy!
-    redirect_to posts_path
+    redirect_to posts_path, alert: "削除しました"
   end
 
   private
