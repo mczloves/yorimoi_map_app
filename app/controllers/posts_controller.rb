@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-
   before_action :set_post, only: %i[edit update destroy]
 
   def index
@@ -11,16 +10,19 @@ class PostsController < ApplicationController
   end
 
   def create
-    post = current_user.posts.create!(post_params)
-    redirect_to post
+    post = current_user.posts.new(post_params)
+    if post.save
+      redirect_to post
+    else
+      render new_posts_path
+    end
   end
 
   def show
     @post = Post.find(params[:id])
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     @post.update!(post_params)
@@ -33,6 +35,7 @@ class PostsController < ApplicationController
   end
 
   private
+
   def post_params
     params.require(:post).permit(:title, :content)
   end
@@ -40,5 +43,4 @@ class PostsController < ApplicationController
   def set_post
     @post = current_user.posts.find(params[:id])
   end
-
 end
