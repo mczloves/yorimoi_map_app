@@ -3,6 +3,9 @@
   <p>【タイトル】 <%= post.title %></p>
   <p>【内容】 <%= post.content %></p>
   <p id="post-<%= post.id %>">
+  <% if post.image? %>
+    <p><%= image_tag post.image.url %></p>
+  <% end %>
     <% if post.liked_by?(current_user) %>
       <%= render "like", post: post %>
     <% else %>
