@@ -6,6 +6,7 @@ class Post < ApplicationRecord
     validates :title
     validates :content
   end
+  mount_uploader :image, ImageUploader
 
   def liked_by?(user)
     likes.any? { |like| like.user_id == user.id }
