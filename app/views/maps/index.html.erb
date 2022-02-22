@@ -1,0 +1,27 @@
+<h1>聖地巡礼を開始する!</h1>
+
+<div id='map'></div>
+
+<style>
+#map {
+  height: 600px;
+  width: 600px;
+}
+</style>
+
+<script>
+let map
+
+function initMap(){
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 36.247377237121775, lng:139.52863130982388},
+    zoom: 13,
+  });
+
+  marker = new google.maps.Marker({
+    position:  {lat: 40.7828, lng:-73.9653},
+    map: map
+  });
+}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdl73EKmSBk_irpjYlVEv-Cd72LzDgcY4&callback=initMap" async defer></script>
