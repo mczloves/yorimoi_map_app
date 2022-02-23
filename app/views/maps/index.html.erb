@@ -10,18 +10,80 @@
 </style>
 
 <script>
-let map
+let map;
+let marker = [];
+let infoWindow = [];
+let markerData = [
+  {
+    name: '館林駅',
+    lat: 36.24619741720197, 
+    lng: 139.52819156877723,
+    address: "群馬県館林市本町２丁目１",
+    url: 'https://www.google.com/maps/place/%E9%A4%A8%E6%9E%97%E9%A7%85/@36.2459984,139.5260083,17z/data=!3m1!4b1!4m5!3m4!1s0x601f30002b1cfd09:0x68f495cf8355da3!8m2!3d36.2459941!4d139.5282023'
+  }, {
+    name: 'キマリとひなたが働いていたローソン',
+    lat: 36.24976007958058,
+    lng: 139.53367619504405,
+    address: "群馬県館林市本町１丁目１８３４−１",
+    url: 'https://www.google.com/maps/place/%E3%83%AD%E3%83%BC%E3%82%BD%E3%83%B3+%E9%A4%A8%E6%9E%97%E6%9C%AC%E7%94%BA%E4%B8%80%E4%B8%81%E7%9B%AE%E5%BA%97/@36.2484097,139.5248652,15z/data=!3m1!4b1!4m5!3m4!1s0x601f30072f2dbf2f:0x5c5d13156d2d418a!8m2!3d36.2483512!4d139.5335961'
+  }, {
+    name: '東屋',
+    lat: 36.241974601266335,
+    lng: 139.55080142755202,
+    address: "群馬県館林市つつじ町",
+    url: 'https://www.google.com/maps/place/%E6%9D%B1%E5%B1%8B/@36.241968,139.5508044,13z/data=!4m9!1m2!2m1!1z5p2x5bGL!3m5!1s0x601f306b08e4f79f:0x944847dd3e2c42c8!8m2!3d36.241968!4d139.5508044!15sCgbmnbHlsYuSAQRwYXJr'
+  }, {
+    name: '花山うどん【南極カリーうどんが食べられます！】',
+    lat: 36.24591528318467,
+    lng: 139.52914031036875,
+    address: '群馬県館林市本町２丁目３−４８',
+    url: 'https://www.google.com/maps/place/%E8%8A%B1%E5%B1%B1%E3%81%86%E3%81%A9%E3%82%93/@36.245974,139.5291745,21z/data=!4m5!3m4!1s0x601f3001cbcef333:0x9b7395e341f783ac!8m2!3d36.2459087!4d139.5291436'
+  }, {
+    name: '1話サブタイトルのたぬき像',
+    lat: 36.24618039427883,
+    lng: 139.52840944582167,
+    address: '群馬県館林市本町２丁目１',
+    url: 'https://www.google.com/maps/place/%E3%81%9F%E3%81%AC%E3%81%8D%E5%83%8F/@36.2461195,139.5281758,20.5z/data=!4m13!1m7!3m6!1s0x601f2fffd83d4073:0x8511d7b83a3c304a!2z44CSMzc0LTAwMjQg576k6aas55yM6aSo5p6X5biC5pys55S677yS5LiB55uu77yR!3b1!8m2!3d36.2450557!4d139.5283178!3m4!1s0x0:0xed349f0873dbd7ec!8m2!3d36.2461679!4d139.5284067'
+  }
+];
 
 function initMap(){
+  let mapLatLng = new google.maps.LatLng({lat: markerData[0]['lat'], lng: markerData[0]['lng']}); // 緯度経度のデータ作成
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 36.247377237121775, lng:139.52863130982388},
+    center: mapLatLng,
     zoom: 13,
   });
 
-  marker = new google.maps.Marker({
-    position:  {lat: 40.7828, lng:-73.9653},
-    map: map
+  for (var i = 0; i < markerData.length; i++) {
+    markerLatLng = new google.maps.LatLng({lat: markerData[i]['lat'], lng: markerData[i]['lng']}); // 緯度経度のデータ作成
+    marker[i] = new google.maps.Marker({ // マーカーの追加
+      position: markerLatLng, // マーカーを立てる位置を指定
+        map: map // マーカーを立てる地図を指定
+      });
+ 
+      infoWindow[i] = new google.maps.InfoWindow({ // 吹き出しの追加
+        content: `<div class="custom-info">
+                <div class="custom-info-item name">
+                ${markerData[i]['name']}
+                </div>
+                <div class="custom-info-item address">
+                ${markerData[i]['address']}
+                </div>
+                <div class="custom-info-item google-map">
+                <a href="${markerData[i]['url']}" target="_blank">MAP</a>
+                </div>
+            </div>`
+      });
+      markerEvent(i); // マーカーにクリックイベントを追加
+  }
+}
+
+function markerEvent(i) {
+    marker[i].addListener('click', function() { // マーカーをクリックしたとき
+      infoWindow[i].open(map, marker[i]); // 吹き出しの表示
   });
 }
+
+
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdl73EKmSBk_irpjYlVEv-Cd72LzDgcY4&callback=initMap" async defer></script>
