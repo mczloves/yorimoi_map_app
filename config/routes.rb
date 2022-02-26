@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   devise_for :users
   root "pages#home"
   get "maps/index"
-  resources :maps, only: [:index]
   resources :posts do
     resource :likes, only: [:create, :destroy]
   end
