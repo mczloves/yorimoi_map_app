@@ -1,0 +1,304 @@
+<h1>聖地巡礼を開始する!</h1>
+
+<div id='map'></div>
+
+<script>
+let map = "";
+let marker = [];
+let infoWindow = [];
+let markerData = [
+  {
+    name: '館林駅',
+    lat: 36.24619741720197, 
+    lng: 139.52819156877723,
+    address: "群馬県館林市本町２丁目１",
+    url: 'https://www.google.com/maps/place/%E9%A4%A8%E6%9E%97%E9%A7%85/@36.2459984,139.5260083,17z/data=!3m1!4b1!4m5!3m4!1s0x601f30002b1cfd09:0x68f495cf8355da3!8m2!3d36.2459941!4d139.5282023'
+  }, {
+    name: 'キマリとひなたが働いていたローソン',
+    lat: 36.24836110899529, 
+    lng: 139.5335984976646,
+    address: "群馬県館林市本町１丁目１８３４−１",
+    url: 'https://www.google.com/maps/place/%E3%83%AD%E3%83%BC%E3%82%BD%E3%83%B3+%E9%A4%A8%E6%9E%97%E6%9C%AC%E7%94%BA%E4%B8%80%E4%B8%81%E7%9B%AE%E5%BA%97/@36.2484097,139.5248652,15z/data=!3m1!4b1!4m5!3m4!1s0x601f30072f2dbf2f:0x5c5d13156d2d418a!8m2!3d36.2483512!4d139.5335961'
+  }, {
+    name: '東屋',
+    lat: 36.241974601266335,
+    lng: 139.55080142755202,
+    address: "群馬県館林市つつじ町",
+    url: 'https://www.google.com/maps/place/%E6%9D%B1%E5%B1%8B/@36.241968,139.5508044,13z/data=!4m9!1m2!2m1!1z5p2x5bGL!3m5!1s0x601f306b08e4f79f:0x944847dd3e2c42c8!8m2!3d36.241968!4d139.5508044!15sCgbmnbHlsYuSAQRwYXJr'
+  }, {
+    name: '花山うどん【南極カリーうどんが食べられます！】',
+    lat: 36.24591528318467,
+    lng: 139.52914031036875,
+    address: '群馬県館林市本町２丁目３−４８',
+    url: 'https://www.google.com/maps/place/%E8%8A%B1%E5%B1%B1%E3%81%86%E3%81%A9%E3%82%93/@36.245974,139.5291745,21z/data=!4m5!3m4!1s0x601f3001cbcef333:0x9b7395e341f783ac!8m2!3d36.2459087!4d139.5291436'
+  }, {
+    name: '【1話サブタイトル】たぬき像',
+    lat: 36.24618039427883,
+    lng: 139.52840944582167,
+    address: '群馬県館林市本町２丁目１',
+    url: 'https://www.google.com/maps/place/%E3%81%9F%E3%81%AC%E3%81%8D%E5%83%8F/@36.2461195,139.5281758,20.5z/data=!4m13!1m7!3m6!1s0x601f2fffd83d4073:0x8511d7b83a3c304a!2z44CSMzc0LTAwMjQg576k6aas55yM6aSo5p6X5biC5pys55S677yS5LiB55uu77yR!3b1!8m2!3d36.2450557!4d139.5283178!3m4!1s0x0:0xed349f0873dbd7ec!8m2!3d36.2461679!4d139.5284067'
+  }, {
+    name: '【1話】 キマリが着替えをしたトイレ',
+    lat: 36.246118137960636,
+    lng: 139.52877124997545,
+    address: '群馬県館林市本町２丁目３−１',
+    url: 'https://www.google.com/maps/place/%E9%A4%A8%E6%9E%97%E9%A7%85%E6%9D%B1%E5%8F%A3%E3%83%90%E3%82%B9%E5%BE%85%E5%90%88%E6%89%80%E3%83%BB%E3%83%88%E3%82%A4%E3%83%AC/@36.2461076,139.5112556,14z/data=!4m15!1m9!4m8!1m0!1m6!1m2!1s0x601f3001cd3ac595:0x60ef14d734793c9f!2z44CSMzc0LTAwMjQg576k6aas55yM6aSo5p6X5biC5pys55S677yS5LiB55uu77yR4oiS77yRIOmkqOael-mnheims-WFieahiOWGheaJgA!2m2!1d139.5281686!2d36.2465505!3m4!1s0x601f300032d1fac9:0x3eea337478034446!8m2!3d36.246107!4d139.5287625'
+  }, {
+    name: '館林駅観光案内所 【公式】キャラアクリルキーホルダー販売',
+    lat: 36.246052133075295,
+    lng: 139.52876650959539,
+    address: '群馬県館林市本町２丁目3−１',
+    url: 'https://www.google.com/maps/place/%E9%A4%A8%E6%9E%97%E9%A7%85%E8%A6%B3%E5%85%89%E6%A1%88%E5%86%85%E6%89%80/@36.2462823,139.5260336,17z/data=!4m12!1m6!3m5!1s0x601f3001cd3ac595:0x60ef14d734793c9f!2z6aSo5p6X6aeF6Kaz5YWJ5qGI5YaF5omA!8m2!3d36.2465505!4d139.5281686!3m4!1s0x601f3001cd3ac595:0x60ef14d734793c9f!8m2!3d36.2465505!4d139.5281686'
+  }, {
+    name: '館林ヒルズホテル 【レンタサイクル貸出】',
+    lat: 36.247675159891905,
+    lng: 139.52816530542256,
+    address: '群馬県館林市仲町１−７',
+    url: 'https://www.google.com/maps/place/%E9%A4%A8%E6%9E%97%E3%83%92%E3%83%AB%E3%82%BA%E3%83%9B%E3%83%86%E3%83%AB/@36.247664,139.5278896,20z/data=!4m8!3m7!1s0x601f31d6434fcac3:0xb7dbe31b923f00e9!5m2!4m1!1i2!8m2!3d36.247664!4d139.5281632'
+  }, {
+    name: '【3話】 駅前パチンコDEF',
+    lat: 36.24740784582601,
+    lng: 139.5286747743817,
+    address: '群馬県館林市仲町２−１',
+    url: 'https://www.google.com/maps/place/%E9%A7%85%E5%89%8D%E3%83%91%E3%83%81%E3%83%B3%E3%82%B3%EF%BC%A4%EF%BC%A5%EF%BC%A6/@36.247319,139.5280072,18.71z/data=!3m1!5s0x601f300017670675:0xf150ba0590137792!4m5!3m4!1s0x601f30001766627d:0xd22de451985c85d3!8m2!3d36.247361!4d139.5286875'
+  }, {
+    name: '【3話】結月が宿泊したホテル',
+    lat: 36.24368925085281,
+    lng: 139.53894245398885,
+    address: '群馬県館林市松原１丁目２２−２',
+    url: 'https://www.google.com/maps/place/%E9%A4%A8%E6%9E%97%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%89%E3%83%9B%E3%83%86%E3%83%AB/@36.2436809,139.538807,21z/data=!4m8!3m7!1s0x601f300fe19d2f4d:0x17157a4cbecf15a!5m2!4m1!1i2!8m2!3d36.2436809!4d139.5389453'
+  }, {
+    name: '【1,4,5話】めぐっちゃん行きつけのカフェ カフェ・ド・スタール ※巡回ノートあり',
+    lat: 36.24571803823696,
+    lng: 139.52873674108173,
+    address: '群馬県館林市本町２丁目２−４',
+    url: 'https://www.google.com/maps/place/Cafe+de+Sta%C3%ABl/@36.2458526,139.5288375,15z/data=!4m12!1m6!3m5!1s0x601f3001ce505089:0x93c8060abcc9232e!2sCafe+de+Sta%C3%ABl!8m2!3d36.2456924!4d139.5287634!3m4!1s0x601f3001ce505089:0x93c8060abcc9232e!8m2!3d36.2456924!4d139.5287634'
+  }, {
+    name: '【OP,3話】よこつか花店',
+    lat: 36.24709497580173, 
+    lng: 139.5323216915128,
+    address: '群馬県館林市仲町３−３３',
+    url: 'https://www.google.com/maps/place/%E3%82%88%E3%81%93%E3%81%A4%E3%81%8B%E8%8A%B1%E5%BA%97/@36.247076,139.5320454,20z/data=!4m5!3m4!1s0x601f3001251a4371:0x17f9fdcd25bc9f11!8m2!3d36.247076!4d139.532319'
+  }, {
+    name: '【2話】とくだ食品店  とくとく食料品店',
+    lat: 36.24810317503815,
+    lng: 139.5336030030685,
+    address: '群馬県館林市本町２丁目９−２０',
+    url: 'https://www.google.com/maps/place/%E3%80%92374-0024+%E7%BE%A4%E9%A6%AC%E7%9C%8C%E9%A4%A8%E6%9E%97%E5%B8%82%E6%9C%AC%E7%94%BA%EF%BC%92%E4%B8%81%E7%9B%AE%EF%BC%99%E2%88%92%EF%BC%92%EF%BC%90/@36.2480478,139.5333395,20.14z/data=!4m5!3m4!1s0x601f3006d7d8ae0f:0x10d2d613cd2b759f!8m2!3d36.2480838!4d139.5335979'
+  }, {
+    name: '居酒屋 杏 ※巡回ノートあり',
+    lat: 36.248678920214566,
+    lng: 139.53387931518475,
+    address: '群馬県館林市仲町１−１０',
+    url: 'https://www.google.com/maps/place/%E6%9D%8F/@36.2485357,139.5329282,18.49z/data=!4m13!1m7!3m6!1s0x601f3006d7d8ae0f:0x10d2d613cd2b759f!2z44CSMzc0LTAwMjQg576k6aas55yM6aSo5p6X5biC5pys55S677yS5LiB55uu77yZ4oiS77yS77yQ!3b1!8m2!3d36.2480838!4d139.5335979!3m4!1s0x601f30072567c967:0x2ba6dc77455e86b5!8m2!3d36.2486133!4d139.5338683'
+  }, {
+    name: '【5話】ゴリラビル',
+    lat: 36.24721550279729,
+    lng: 139.5357332936968,
+    address: '群馬県館林市本町２丁目１７−２７',
+    url: 'https://www.google.com/maps/place/%E3%80%92374-0024+%E7%BE%A4%E9%A6%AC%E7%9C%8C%E9%A4%A8%E6%9E%97%E5%B8%82%E6%9C%AC%E7%94%BA%EF%BC%92%E4%B8%81%E7%9B%AE%EF%BC%91%EF%BC%97%E2%88%92%EF%BC%92%EF%BC%97+%E3%82%B4%E3%83%AA%E3%83%A9%E3%83%93%E3%83%AB/@36.2471668,139.535736,19z/data=!3m1!4b1!4m5!3m4!1s0x601f30067d15d999:0x40d294a9f86666dc!8m2!3d36.2471668!4d139.535736'
+  }, {
+    name: '【5話】森田屋支店, SUGIE',
+    lat: 36.24674593316909,
+    lng: 139.5365180075055,
+    address: '群馬県館林市大手町７−３７',
+    url: 'https://www.google.com/maps/place/%E6%A3%AE%E7%94%B0%E5%B1%8B%E6%94%AF%E5%BA%97/@36.246737,139.5362973,20z/data=!4m5!3m4!1s0x601f3005d9423893:0xce73b4415a4458cb!8m2!3d36.246737!4d139.536518'
+  }, {
+    name: '【5話】川',
+    lat: 36.246624275815556,
+    lng: 139.53653256234048,
+    address: '群馬県館林市大手町３−１',
+    url: 'https://www.google.com/maps/place/%E4%BA%95%E5%B2%A1%E7%90%86%E5%AE%B9%E5%AE%A4/@36.2466432,139.5365259,20z/data=!4m5!3m4!1s0x601f3005db99f535:0xcddebed5d30a3d0a!8m2!3d36.2466006!4d139.5365287'
+  }, {
+    name: '【ED, 5話】カーブミラー',
+    lat: 36.246552863344895,
+    lng: 139.53581311349632,
+    address: '群馬県館林市本町２丁目１６−２２',
+    url: 'https://www.google.com/maps/place/%E3%80%92374-0024+%E7%BE%A4%E9%A6%AC%E7%9C%8C%E9%A4%A8%E6%9E%97%E5%B8%82%E6%9C%AC%E7%94%BA%EF%BC%92%E4%B8%81%E7%9B%AE%EF%BC%91%EF%BC%96%E2%88%92%EF%BC%92%EF%BC%92/@36.2464314,139.5357213,21z/data=!4m5!3m4!1s0x601f3005d48f4fb5:0x37ac4d0859f1c94d!8m2!3d36.2464201!4d139.535736'
+  }, {
+    name: '【1話】三和地所 ふたば地所 ',
+    lat: 36.24574127220346,
+    lng: 139.53214664340726,
+    address: '群馬県館林市本町２丁目７−１',
+    url: 'https://www.google.com/maps/place/%E4%B8%89%E5%92%8C%E5%9C%B0%E6%89%80/@36.2456624,139.5320714,17z/data=!3m1!4b1!4m5!3m4!1s0x601f30015cbe3fdb:0x8c25bd8d2dcab7ef!8m2!3d36.2456624!4d139.5320714'
+  }, {
+    name: '【2話】menkoigirls自販機 PonPonGirls自販機 ',
+    lat: 36.244974375049566,
+    lng: 139.53283830806234,
+    address: '群馬県館林市本町３丁目１−５',
+    url: 'https://www.google.com/maps/place/%E3%83%9B%E3%83%86%E3%83%AB%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%86%E3%82%A3%E3%83%BC%E6%9C%AC%E9%A4%A8/@36.2449483,139.5326341,17z/data=!3m1!4b1!4m5!3m4!1s0x601f3003fa54be4f:0x2b11db20205dad53!8m2!3d36.2449446!4d139.5328343'
+  }, {
+    name: '【キマリの自宅付近と思われる神社】金山神社',
+    lat: 36.24630873416318,
+    lng: 139.53566421099308,
+    address: '群馬県館林市本町２丁目１６−２６',
+    url: 'https://www.google.com/maps/place/%E9%87%91%E5%B1%B1%E7%A5%9E%E7%A4%BE/@36.2463206,139.5350339,19z/data=!4m5!3m4!1s0x601f314da21d0d57:0x4f40ddff2136096b!8m2!3d36.2462673!4d139.5356531'
+  }, {
+    name: 'つつじが岡ふれあいセンター 【よりもいコーナーあります!】※公式アクリルキー販売,巡回ノートあり',
+    lat: 36.24168450262436,
+    lng: 139.5514259646649,
+    address: '群馬県館林市花山町３１７６',
+    url: 'https://www.google.com/maps/place/%E3%81%A4%E3%81%A4%E3%81%98%E3%81%8C%E5%B2%A1%E3%81%B5%E3%82%8C%E3%81%82%E3%81%84%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC/@36.2415628,139.5507349,17.61z/data=!4m5!3m4!1s0x601f315edf96f029:0xf5448971fb7523c1!8m2!3d36.2416265!4d139.5514197'
+  }, {
+    name: '向井千秋記念子ども科学館（迎千秋船長）',
+    lat: 36.24426345048577,
+    lng: 139.5449865393229,
+    address: '群馬県館林市城町２−２',
+    url: 'https://www.google.com/maps/place/%E5%90%91%E4%BA%95%E5%8D%83%E7%A7%8B%E8%A8%98%E5%BF%B5%E5%AD%90%E3%81%A9%E3%82%82%E7%A7%91%E5%AD%A6%E9%A4%A8/@36.2442137,139.5443777,18z/data=!4m5!3m4!1s0x601f3012461bd615:0xb636533e1cfa1cf3!8m2!3d36.2442137!4d139.5449818'
+  }, {
+    name: '【5話 回想シーン】城沼総合運動場 ちびっこ広場',
+    lat: 36.24201425777873,
+    lng: 139.54229771837996,
+    address: '群馬県館林市つつじ町１４−１',
+    url: 'https://www.google.com/maps/place/%E5%9F%8E%E6%B2%BC%E7%B7%8F%E5%90%88%E9%81%8B%E5%8B%95%E5%A0%B4+%E3%81%A1%E3%81%B3%E3%81%A3%E3%81%93%E5%BA%83%E5%A0%B4/@36.2419918,139.5421854,21z/data=!4m5!3m4!1s0x0:0x642fdd36f6e299c0!8m2!3d36.2420106!4d139.5422979'
+  }, {
+    name: '城町食堂 【よりもい展示コーナーあり】',
+    lat: 36.244390495743026,
+    lng: 139.54180326450089,
+    address: '群馬県館林市城町１−１',
+    url: 'https://www.google.com/maps/place/%E5%9F%8E%E7%94%BA%E9%A3%9F%E5%A0%82/@36.2443894,139.5416678,21z/data=!4m12!1m6!3m5!1s0x0:0x642fdd36f6e299c0!2z5Z-O5rK857eP5ZCI6YGL5YuV5aC0IOOBoeOBs-OBo-OBk-W6g-WgtA!8m2!3d36.2420106!4d139.5422979!3m4!1s0x601f31ef03a7bb5f:0xdc680782b0970da8!8m2!3d36.2443893!4d139.5418025'
+  }, {
+    name: '館林市役所',
+    lat: 36.24486022425546,
+    lng: 139.54194503290975,
+    address: '群馬県館林市城町１−１',
+    url: 'https://www.google.com/maps/place/%E9%A4%A8%E6%9E%97%E5%B8%82%E5%BD%B9%E6%89%80/@36.2448429,139.5410867,18z/data=!4m12!1m6!3m5!1s0x0:0x642fdd36f6e299c0!2z5Z-O5rK857eP5ZCI6YGL5YuV5aC0IOOBoeOBs-OBo-OBk-W6g-WgtA!8m2!3d36.2420106!4d139.5422979!3m4!1s0x601f300e21e9c431:0x19dadd5b3c0179d5!8m2!3d36.2448429!4d139.5419484'
+  }, {
+    name: '瞬とぴいぷる 【公式 南極チャレンジうどん・パーシャル丼が食べられます!】※巡回ノートあり',
+    lat: 36.24685831512995,
+    lng: 139.54051441200411,
+    address: '群馬県館林市城町４−２５',
+    url: 'https://www.google.com/maps/place/%E7%9E%AC%E3%81%A8%E3%81%B4%E3%81%84%E3%81%B7%E3%82%8B/@36.2468422,139.5394249,18z/data=!4m12!1m6!3m5!1s0x0:0x642fdd36f6e299c0!2z5Z-O5rK857eP5ZCI6YGL5YuV5aC0IOOBoeOBs-OBo-OBk-W6g-WgtA!8m2!3d36.2420106!4d139.5422979!3m4!1s0x601f300f03399075:0x58245ea499e367c6!8m2!3d36.2468421!4d139.5405193'
+  }, {
+    name: '尾曳稲荷神社 鳥居と狐がたくさん!',
+    lat: 36.24486537562001,
+    lng: 139.54748105056905,
+    address: '群馬県館林市尾曳町１０−１',
+    url: 'https://www.google.com/maps/place/%E5%B0%BE%E6%9B%B3%E7%A8%B2%E8%8D%B7%E7%A5%9E%E7%A4%BE/@36.2448713,139.5474046,21z/data=!4m5!3m4!1s0x601f3012d90d3985:0xe439c01fc18f11fe!8m2!3d36.244858!4d139.5474915'
+  }, {
+    name: '【1話】たぬき像',
+    lat: 36.24509491897586,
+    lng: 139.53914875041727,
+    address: '群馬県館林市本町３丁目８−１４',
+    url: 'https://www.google.com/maps/place/%E3%80%92374-0024+%E7%BE%A4%E9%A6%AC%E7%9C%8C%E9%A4%A8%E6%9E%97%E5%B8%82%E6%9C%AC%E7%94%BA%EF%BC%93%E4%B8%81%E7%9B%AE%EF%BC%98%E2%88%92%EF%BC%91%EF%BC%94/@36.2450917,139.5302964,15z/data=!3m1!4b1!4m13!1m7!3m6!1s0x601f300e89f254cf:0x77404f8dd84a571a!2z576k6aas55yM6aSo5p6X5biC!3b1!8m2!3d36.244806!4d139.5422532!3m4!1s0x601f300f9095096f:0xa60f4fad90d2bdb9!8m2!3d36.245092!4d139.5390512'
+  }, {
+    name: '【3話】ココス 館林松原店, 館林市プリンセス宝石',
+    lat: 36.23467023443706,
+    lng: 139.5405431633885,
+    address: '群馬県館林市松原３丁目5−６',
+    url: 'https://www.google.com/maps/place/%E3%82%B3%E3%82%B3%E3%82%B9+%E9%A4%A8%E6%9E%97%E6%9D%BE%E5%8E%9F%E5%BA%97/@36.2347112,139.5398274,18z/data=!4m5!3m4!1s0x601f317a00e62d03:0xc5d4c15e15e537d4!8m2!3d36.2347113!4d139.5404599'
+  }, {
+    name: 'ハンドメイドレザークラフトコテージ【公式キーホルダー】作成及び購入可能! ※巡回ノートあり',
+    lat: 36.23530703404258,
+    lng: 139.53744279607614,
+    address: '群馬県館林市緑町２丁目２８−２７',
+    url: 'https://www.google.com/maps/place/%E3%83%8F%E3%83%B3%E3%83%89%E3%83%A1%E3%82%A4%E3%83%89%E3%83%AC%E3%82%B6%E3%83%BC%E3%82%AF%E3%83%A9%E3%83%95%E3%83%88+%E3%82%B3%E3%83%86%E3%83%BC%E3%82%B8/@36.2352486,139.5374307,20z/data=!4m5!3m4!1s0x601f30183a96da6d:0xff4d6d38625f2087!8m2!3d36.2353016!4d139.5374405'
+  }, {
+    name: 'ラーメン厨房ぽれぽれ 【公式ラーメン及びクリアファイル】※巡回ノートあり',
+    lat: 36.235843981749305,
+    lng: 139.53339359178054,
+    address: '群馬県館林市緑町１丁目３２−８',
+    url: 'https://www.google.com/maps/place/%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3%E5%8E%A8%E6%88%BF%E3%81%BD%E3%82%8C%E3%81%BD%E3%82%8C/@36.2358158,139.53366,19.55z/data=!4m5!3m4!1s0x601f301949353863:0x543d475426f6396b!8m2!3d36.2358356!4d139.5333939'
+  }, {
+    name: 'カスミ 館林店 報瀬 バイト先スーパー',
+    lat: 36.23588718092133,
+    lng: 139.5285432972079,
+    address: '群馬県館林市新宿１丁目１８−３',
+    url: 'https://www.google.com/maps/place/%E3%82%AB%E3%82%B9%E3%83%9F+%E9%A4%A8%E6%9E%97%E5%BA%97/@36.2357357,139.5286291,19z/data=!4m5!3m4!1s0x0:0x83a2aaeab668f159!8m2!3d36.2358742!4d139.5285433'
+  }, {
+    name: '大島まんじゅう屋 【公式 ペンギン饅頭】※巡回ノートあり',
+    lat: 36.231794594919045,
+    lng: 139.56102067151494,
+    address: '群馬県館林市赤生田町２１１０',
+    url: 'https://www.google.com/maps/place/%E5%A4%A7%E5%B3%B6%E3%81%BE%E3%82%93%E3%81%98%E3%82%85%E3%81%86%E5%B1%8B/@36.2317883,139.5572831,16z/data=!4m12!1m6!3m5!1s0x601f3051aa8e4181:0xbc1a2c8ecf23c94!2z5aSn5bO244G-44KT44GY44KF44GG5bGL!8m2!3d36.2317885!4d139.5610147!3m4!1s0x601f3051aa8e4181:0xbc1a2c8ecf23c94!8m2!3d36.2317885!4d139.5610147'
+  }, {
+    name: '茂林寺前駅 100万円を落とした駅',
+    lat: 36.22558429494841,
+    lng: 139.52715893434433,
+    address: '群馬県館林市堀工町１６２４',
+    url: 'https://www.google.com/maps/place/%E8%8C%82%E6%9E%97%E5%AF%BA%E5%89%8D%E9%A7%85/@36.2255713,139.5270684,21z/data=!4m12!1m6!3m5!1s0x601f2fdf458ca6bd:0x46730210bbf59b80!2z6IyC5p6X5a-65YmN6aeF!8m2!3d36.2255848!4d139.5271617!3m4!1s0x601f2fdf458ca6bd:0x46730210bbf59b80!8m2!3d36.2255848!4d139.5271617'
+  }, {
+    name: '【3話】たぬき',
+    lat: 36.225591343874534,
+    lng: 139.52725288124287,
+    address: '群馬県館林市堀工町１６２４',
+    url: 'https://www.google.com/maps/place/%E8%8C%82%E6%9E%97%E5%AF%BA%E5%89%8D%E9%A7%85/@36.2255718,139.5271598,20.99z/data=!4m12!1m6!3m5!1s0x601f2fdf458ca6bd:0x46730210bbf59b80!2z6IyC5p6X5a-65YmN6aeF!8m2!3d36.2255848!4d139.5271617!3m4!1s0x601f2fdf458ca6bd:0x46730210bbf59b80!8m2!3d36.2255848!4d139.5271617'
+  }, {
+    name: 'コミック 100万円を下ろした郵便局',
+    lat: 36.225416640078,
+    lng: 139.52748387625522,
+    address: '群馬県館林市堀工町１６２４−８',
+    url: 'https://www.google.com/maps/place/%E8%8C%82%E6%9E%97%E5%AF%BA%E9%A7%85%E5%89%8D%E9%83%B5%E4%BE%BF%E5%B1%80/@36.2254845,139.5271248,19.61z/data=!4m12!1m6!3m5!1s0x601f2fdf458ca6bd:0x46730210bbf59b80!2z6IyC5p6X5a-65YmN6aeF!8m2!3d36.2255848!4d139.5271617!3m4!1s0x601f2fdf5176f0ad:0x9794eb9a465a135d!8m2!3d36.2254142!4d139.5274813'
+  }, {
+    name: '【3話】報瀬宅を出た白石親子',
+    lat: 36.22704643924588,
+    lng: 139.52993907095635,
+    address: '群馬県館林市堀工町１８６１−９３',
+    url: 'https://www.google.com/maps/place/%E3%80%92374-0033+%E7%BE%A4%E9%A6%AC%E7%9C%8C%E9%A4%A8%E6%9E%97%E5%B8%82%E5%A0%80%E5%B7%A5%E7%94%BA%EF%BC%91%EF%BC%98%EF%BC%96%EF%BC%91%E2%88%92%EF%BC%99%EF%BC%93/@36.2270152,139.5290092,17z/data=!4m5!3m4!1s0x601f3020dbf4f8cb:0x45a0744212147590!8m2!3d36.2270152!4d139.5301673'
+  }, {
+    name: '【1,2,5,13話】茂林寺 ※巡回ノートあり',
+    lat: 36.224456394891355,
+    lng: 139.53114187077625,
+    address: '群馬県館林市堀工町１５７０',
+    url: 'https://www.google.com/maps/place/%E8%8C%82%E6%9E%97%E5%AF%BA/@36.2244514,139.530521,18.8z/data=!4m5!3m4!1s0x601f3026f9e811ab:0x4047c7f09aa443b6!8m2!3d36.224443!4d139.531133'
+  }, {
+    name: '【5話】乾杯した自販機',
+    lat: 36.223827070946065,
+    lng: 139.5321677468193,
+    address: '群馬県館林市堀工町１５７０',
+    url: 'https://www.google.com/maps/place/%E8%8C%82%E6%9E%97%E5%AF%BA+%E5%A4%9A%E6%A9%9F%E8%83%BD%E3%83%88%E3%82%A4%E3%83%AC/@36.2238915,139.5324833,19z/data=!4m5!3m4!1s0x601f31bfd89d5d9f:0x261ce25209d362c7!8m2!3d36.2236868!4d139.5320315'
+  }, {
+    name: 'もり陣うどん ※巡回ノートあり',
+    lat: 36.22345207064747,
+    lng: 139.53076324424606,
+    address: '群馬県館林市堀工町１５６０',
+    url: 'https://www.google.com/maps/place/%E3%82%82%E3%82%8A%E9%99%A3%E3%81%86%E3%81%A9%E3%82%93/@36.22355,139.5301961,18.56z/data=!4m5!3m4!1s0x601f30264db6a7f5:0x8cd1f7becc6e3291!8m2!3d36.2234526!4d139.5307639'
+  }, {
+    name: '【5話】支那・虎  日向が南極へ向けて出発するシーン',
+    lat: 36.17054393104008,
+    lng: 139.53576774972802,
+    address: '埼玉県羽生市中央１丁目１−２３',
+    url: 'https://www.google.com/maps/place/%E6%94%AF%E9%82%A3%E3%83%BB%E8%99%8E/@36.1705166,139.5354039,19.66z/data=!4m12!1m6!3m5!1s0x0:0x36d5b635a1901665!2z5pSv6YKj44O76JmO!8m2!3d36.1705433!4d139.5357655!3m4!1s0x0:0x36d5b635a1901665!8m2!3d36.1705433!4d139.5357655'
+  }
+];
+
+function initMap(){
+  let mapLatLng = new google.maps.LatLng({lat: markerData[0]['lat'], lng: markerData[0]['lng']}); // 緯度経度のデータ作成
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: mapLatLng,
+    zoom: 13,
+  });
+
+  for (var i = 0; i < markerData.length; i++) {
+    markerLatLng = new google.maps.LatLng({lat: markerData[i]['lat'], lng: markerData[i]['lng']}); // 緯度経度のデータ作成
+    marker[i] = new google.maps.Marker({ // マーカーの追加
+      position: markerLatLng, // マーカーを立てる位置を指定
+      map: map // マーカーを立てる地図を指定
+    });
+ 
+      infoWindow[i] = new google.maps.InfoWindow({ // 吹き出しの追加
+        content: `<div class="custom-info">
+                <div class="custom-info-item name">
+                ${markerData[i]['name']}
+                </div>
+                <div class="custom-info-item address">
+                ${markerData[i]['address']}
+                </div>
+                <div class="custom-info-item google-map">
+                <a href="${markerData[i]['url']}" target="_blank">MAP</a>
+                </div>
+            </div>`
+      });
+      markerEvent(i); // マーカーにクリックイベントを追加
+  }
+}
+
+function markerEvent(i) {
+    marker[i].addListener('click', function() { // マーカーをクリックしたとき
+      infoWindow[i].open(map, marker[i]); // 吹き出しの表示
+  });
+}
+
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdl73EKmSBk_irpjYlVEv-Cd72LzDgcY4&callback=initMap" async defer></script>
