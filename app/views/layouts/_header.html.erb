@@ -3,6 +3,8 @@
   <%= link_to 'ホーム', root_path %>
   <%= link_to "一覧ページ", posts_path %>
   <%= link_to "新規投稿ページ", new_post_path %>
+  <%= link_to '聖地MAPを見る', "/maps/index" %>
+  <%= link_to '聖地リスト', spots_path %>
   <%= link_to "アカウント編集", edit_user_registration_path %>
   <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "ログアウトしますか？" } %>
   <%= "【名前】#{current_user.name}" %>
