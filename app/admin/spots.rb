@@ -1,5 +1,5 @@
 ActiveAdmin.register Spot do
-  permit_params :name, :address, :body, :image
+  permit_params :name, :address, :body, :image, :image_2
 
   form do |f|
     f.inputs "Spots" do
@@ -7,6 +7,7 @@ ActiveAdmin.register Spot do
       f.input :address
       f.input :body
       f.input :image, multiple: true, :as => :file
+      f.input :image_2, multiple: true, :as => :file
     end
     f.actions
   end
