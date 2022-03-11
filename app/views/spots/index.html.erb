@@ -2,7 +2,7 @@
 <% @spots.each do |spot| %>
   <p>場所 : <%= spot.name %></p>
   <p>住所 : <%= spot.address %></p>
-  <p>紹介 : <%= spot.body %></p>
+  <p>紹介<%= simple_format(h(spot.body)) %></p>
   <% if spot.image? %>
     <p><%= image_tag spot.image.url %></p>
   <% end %>

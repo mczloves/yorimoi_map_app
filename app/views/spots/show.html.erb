@@ -2,7 +2,7 @@
 <p>※このサイトでは「宇宙よりも遠い場所」の作品画像を比較目的のために引用しております。画像の著作権は『©YORIMOI PARTNERS』にあります。</p>
 <p>名前 : <%= @spot.name %></p>
 <p>住所 : <%= @spot.address %></p>
-<p>紹介 : <%= @spot.body %></p>
+<p>紹介 : <%= simple_format(h(@spot.body)) %></p>
 
 
 <% if @spot.image_2? %>
