@@ -6,14 +6,14 @@ ActiveAdmin.register Spot do
       f.input :name
       f.input :address
       f.input :body
-      f.input :image, multiple: true, :as => :file
-      f.input :image_2, multiple: true, :as => :file
+      f.input :image, multiple: true, as: :file
+      f.input :image_2, multiple: true, as: :file
       f.input :url
     end
     f.actions
   end
 
-  show do |item_image|
+  show do |_item_image|
     attributes_table do
       row :name
       row :address
@@ -25,5 +25,4 @@ ActiveAdmin.register Spot do
       end
     end
   end
-  
 end
