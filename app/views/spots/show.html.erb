@@ -9,4 +9,6 @@
   <h2>アニメとの比較画像</h2>
   <p><%= image_tag @spot.image_2.url %></p>
 <% end %>
-<%= link_to '聖地リストへ戻る', spots_path %>
+
+<h2><%= link_to 'GoogleMapを見る', @spot.url, target: :_blank, rel: "noopener noreferrer" %></h2>
+<h2><%= link_to '聖地リストへ戻る', spots_path %></h2>
