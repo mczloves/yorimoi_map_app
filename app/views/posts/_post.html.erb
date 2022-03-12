@@ -1,5 +1,6 @@
 <div>
   <p>【名前】 <%= post.user.name %></p>
+  <p>【投稿日】<%= post.set_date %></p>
   <p>【タイトル】 <%= post.title %></p>
   <p>【感想】 <%= simple_format(h(post.content)) %></p>
   <p id="post-<%= post.id %>">
