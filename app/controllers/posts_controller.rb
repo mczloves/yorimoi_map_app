@@ -1,8 +1,10 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[edit update destroy]
 
+  PER_PAGE = 12
+
   def index
-    @posts = Post.includes(:user, :likes).order(:created_at)
+    @posts = Post.includes(:user, :likes).order(created_at: :desc).page(params[:page]).per(PER_PAGE)
   end
 
   def new

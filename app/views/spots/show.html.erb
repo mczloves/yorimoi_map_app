@@ -1,8 +1,8 @@
 <h1>聖地詳細</h1>
-<p>※このサイトでは「宇宙よりも遠い場所」の作品画像を比較目的のために引用しております。画像の著作権は『©YORIMOI PARTNERS』にあります。</p>
-<p>名前 : <%= @spot.name %></p>
-<p>住所 : <%= @spot.address %></p>
-<p>紹介 : <%= simple_format(h(@spot.body)) %></p>
+
+<p>【聖地名】<%= @spot.name %></p>
+<p>【住所】<%= @spot.address %></p>
+<p>【聖地の紹介】<%= simple_format(h(@spot.body)) %></p>
 
 
 <% if @spot.image_2? %>
@@ -10,5 +10,6 @@
   <p><%= image_tag @spot.image_2.url %></p>
 <% end %>
 
+<p>※このサイトでは「宇宙よりも遠い場所」の作品画像を比較目的のために引用しております。画像の著作権は『©YORIMOI PARTNERS』にあります。</p>
 <h2><%= link_to 'GoogleMapを見る', @spot.url, target: :_blank, rel: "noopener noreferrer" %></h2>
 <h2><%= link_to '聖地リストへ戻る', spots_path %></h2>

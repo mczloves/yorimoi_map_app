@@ -1,12 +1,11 @@
 <h1>聖地リスト</h1>
 <% @spots.each do |spot| %>
-  <p>場所 : <%= spot.name %></p>
-  <p>住所 : <%= spot.address %></p>
-  <p>紹介<%= simple_format(h(spot.body)) %></p>
+  <p>【聖地名】 <%= spot.name %></p>
+  <p>【住所】 <%= spot.address %></p>
   <% if spot.image? %>
     <p><%= image_tag spot.image.url %></p>
   <% end %>
-  <%= link_to '詳細を見る', spot_path(spot) %>
+  <%= link_to 'この聖地を詳しく見る', spot_path(spot) %>
   <hr>
 <% end %>
-
+<%= paginate @spots %>
