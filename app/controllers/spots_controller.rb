@@ -8,6 +8,8 @@ class SpotsController < ApplicationController
 
   def show
     @spot = Spot.find(params[:id])
+    @spot_user = SpotUser.new
+    @spot_users = @spot.spot_users.includes(:user, :spot).order(created_at: :desc)
   end
 
 end

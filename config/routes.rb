@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :spots, only: [:index, :show]
+  resources :spots, only: [:index, :show] do
+    resource :spot_users, only: [:create, :destroy]
+  end
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users
@@ -10,7 +13,13 @@ Rails.application.routes.draw do
   resources :posts do
     resource :likes, only: [:create, :destroy]
   end
+
   resources :posts do
     resource :comments, only: [:create, :destroy]
   end
+
+  #resources :spots do
+    #resource :spot_users, only: [:create, :destroy]
+  #end
+
 end

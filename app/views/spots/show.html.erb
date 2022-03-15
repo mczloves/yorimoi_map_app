@@ -13,3 +13,21 @@
 <p>※このサイトでは「宇宙よりも遠い場所」の作品画像を比較目的のために引用しております。画像の著作権は『©YORIMOI PARTNERS』にあります。</p>
 <h2><%= link_to 'GoogleMapを見る', @spot.url, target: :_blank, rel: "noopener noreferrer" %></h2>
 <h2><%= link_to '聖地リストへ戻る', spots_path %></h2>
+
+
+<h2>コメント一覧</h2>
+<% @spot.spot_users.each do |spot_user| %>
+  <p>名前 : <%= spot_user.user.name %></p>
+  <p>本文 :<%= simple_format(h(spot_user.comment)) %></p>
+  <% if current_user.id == spot_user.user_id %>
+    <%= link_to '削除する', spot_spot_users_path(spot_id: @spot, id: spot_user.id), method: :delete %>
+  <% end %>
+<hr>
+<% end %>
+
+<h3>コメントする</h3>
+<%= form_with model: [@spot, @spot_user], local: true do |f| %>
+  <p><%= f.text_area :comment %></p>
+  <p><%= f.file_field :image %></p>
+  <%= f.submit "投稿する" %>
+<% end %>
