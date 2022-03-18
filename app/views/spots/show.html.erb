@@ -18,8 +18,8 @@
 <h2>コメント一覧</h2>
 <% @spot.spot_users.each do |spot_user| %>
   <p>名前 : <%= spot_user.user.name %></p>
-  <p>本文 :<%= simple_format(h(spot_user.comment)) %></p>
-  <% if current_user.id == spot_user.user_id %>
+  <p>内容 :<%= simple_format(h(spot_user.comment)) %></p>
+  <% if current_user && current_user.id == spot_user.user_id %>
     <%= link_to '削除する', spot_spot_users_path(spot_id: @spot, id: spot_user.id), method: :delete %>
   <% end %>
 <hr>

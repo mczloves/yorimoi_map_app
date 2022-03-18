@@ -29,6 +29,9 @@
 <% @post.comments.each do |comment| %>
   <p>名前: <%= comment.user.name %></p>
   <p>コメント<%= simple_format(h(comment.body)) %></p>
+<% if current_user.id == comment.user_id %>
+  <%= link_to '削除する', post_comments_path(post_id: @post, id: comment.id), method: :delete %>
+<% end %>
 <hr>
 <% end %>
 
