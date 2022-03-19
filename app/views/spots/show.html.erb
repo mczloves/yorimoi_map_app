@@ -19,8 +19,13 @@
 <% @spot.spot_users.each do |spot_user| %>
   <p>名前 : <%= spot_user.user.name %></p>
   <p>内容 :<%= simple_format(h(spot_user.comment)) %></p>
+
+  <% if spot_user.image? %>
+    <p><%= image_tag spot_user.image.url %></p>
+  <% end %>
+
   <% if current_user && current_user.id == spot_user.user_id %>
-    <%= link_to '削除する', spot_spot_users_path(spot_id: @spot, id: spot_user.id), method: :delete %>
+    <%= link_to '削除する', spot_spot_users_path(spot_id: @spot, id: spot_user.id), method: :delete, data: {confirm: "コメントを削除しますか？"} %>
   <% end %>
 <hr>
 <% end %>
