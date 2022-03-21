@@ -12,4 +12,9 @@ class Post < ApplicationRecord
   def liked_by?(user)
     likes.any? { |like| like.user_id == user.id }
   end
+
+  def set_date
+    created_at.strftime("%Y年%m月%d日%H時")
+  end
+
 end

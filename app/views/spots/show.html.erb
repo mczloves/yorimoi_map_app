@@ -1,8 +1,8 @@
 <h1>聖地詳細</h1>
-<p>※このサイトでは「宇宙よりも遠い場所」の作品画像を比較目的のために引用しております。画像の著作権は『©YORIMOI PARTNERS』にあります。</p>
-<p>名前 : <%= @spot.name %></p>
-<p>住所 : <%= @spot.address %></p>
-<p>紹介 : <%= simple_format(h(@spot.body)) %></p>
+
+<p>【聖地名】<%= @spot.name %></p>
+<p>【住所】<%= @spot.address %></p>
+<p>【聖地の紹介】<%= simple_format(h(@spot.body)) %></p>
 
 
 <% if @spot.image_2? %>
@@ -10,5 +10,30 @@
   <p><%= image_tag @spot.image_2.url %></p>
 <% end %>
 
+<p>※このサイトでは「宇宙よりも遠い場所」の作品画像を比較目的のために引用しております。画像の著作権は『©YORIMOI PARTNERS』にあります。</p>
 <h2><%= link_to 'GoogleMapを見る', @spot.url, target: :_blank, rel: "noopener noreferrer" %></h2>
 <h2><%= link_to '聖地リストへ戻る', spots_path %></h2>
+
+
+<h2>コメント一覧</h2>
+<% @spot.spot_users.each do |spot_user| %>
+  <p>名前 : <%= spot_user.user.name %></p>
+  <p>内容 :<%= simple_format(h(spot_user.comment)) %></p>
+
+  <% if spot_user.image? %>
+    <p><%= image_tag spot_user.image.url %></p>
+  <% end %>
+
+  <% if current_user && current_user.id == spot_user.user_id %>
+    <%= link_to '削除する', spot_spot_users_path(spot_id: @spot, id: spot_user.id), method: :delete, data: {confirm: "コメントを削除しますか？"} %>
+  <% end %>
+<hr>
+<% end %>
+
+<h3>コメントする</h3>
+<%= form_with model: [@spot, @spot_user], local: true do |f| %>
+  <p><%= f.text_area :comment %></p>
+  <p>写真を選ぶ</p>
+  <p><%= f.file_field :image %></p>
+  <%= f.submit "投稿する" %>
+<% end %>
