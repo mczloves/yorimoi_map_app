@@ -3,6 +3,7 @@
   <%= form.text_field :title, required: true %><br>
   <%= form.label :content %>
   <%= form.text_area :content, required: true %><br>
+  <p>写真を選ぶ</p>
   <p><%= form.file_field :image %></p><br>
   <%= form.submit "投稿する" %>
 <% end %>

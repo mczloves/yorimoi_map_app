@@ -33,6 +33,7 @@
 <h3>コメントする</h3>
 <%= form_with model: [@spot, @spot_user], local: true do |f| %>
   <p><%= f.text_area :comment %></p>
+  <p>写真を選ぶ</p>
   <p><%= f.file_field :image %></p>
   <%= f.submit "投稿する" %>
 <% end %>
