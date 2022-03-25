@@ -7,10 +7,10 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @post, notice: "コメントを書き込みました。"
     else
-      #@post = Post.find(params[:post_id])
+      # @post = Post.find(params[:post_id])
       redirect_to post_path(@post), notice: "コメントを入力して下さい"
-      #flash.now[:alert] = "コメントを入力して下さい"
-      #redirect_to post_path(@post)
+      # flash.now[:alert] = "コメントを入力して下さい"
+      # redirect_to post_path(@post)
     end
   end
 

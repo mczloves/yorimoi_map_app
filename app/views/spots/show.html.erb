@@ -11,6 +11,14 @@
 <% end %>
 
 <p>※このサイトでは「宇宙よりも遠い場所」の作品画像を比較目的のために引用しております。画像の著作権は『©YORIMOI PARTNERS』にあります。</p>
+
+<h2>ストリートビュー<h2>
+<% if @spot.street_view.present? %>
+  <%= @spot.street_view.html_safe %>
+<% else %>
+  <p>この聖地にはストリートビューがありません<p>
+<% end %>
+
 <h2><%= link_to 'GoogleMapを見る', @spot.url, target: :_blank, rel: "noopener noreferrer" %></h2>
 <h2><%= link_to '聖地リストへ戻る', spots_path %></h2>
 
