@@ -1,5 +1,4 @@
 class SpotsController < ApplicationController
-
   PER_PAGE = 12
 
   def index
@@ -11,5 +10,4 @@ class SpotsController < ApplicationController
     @spot_user = SpotUser.new
     @spot_users = @spot.spot_users.includes(:user, :spot).order(created_at: :desc)
   end
-
 end
