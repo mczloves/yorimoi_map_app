@@ -1,4 +1,5 @@
 class SpotUsersController < ApplicationController
+  before_action :authenticate_user!
   def create
     @spot = Spot.find(params[:spot_id])
     @spot_user = @spot.spot_users.build(spot_user_params)
