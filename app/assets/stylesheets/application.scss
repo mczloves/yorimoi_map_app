@@ -22,3 +22,62 @@
 .alert-alert {
   @extend .alert-danger;
 }
+
+body {
+  min-height:100vh ;
+  position: relative;
+}
+
+footer {
+  footer {
+    background-color: blue;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-top: auto;
+  }
+}
+
+/***** フッター 戻るボタン *****/
+#page_top{
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  right: 100px;
+  bottom: 20px;
+  background: #ba2636;
+  opacity: 0.6;
+}
+
+#page_top a{
+  position: relative;
+  display: block;
+  width: 40px;
+  height: 40px;
+  text-decoration: none;
+}
+
+#page_top a::after{
+  content: '▲';
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  position: absolute;
+  top: 10px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  text-align: center;
+}
+
+@media screen and (max-width: 992px) {
+  #page_top{
+  right: 50px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  #page_top{
+  right: 0px;
+  }
+}

@@ -62,7 +62,7 @@ gem "activeadmin"
 gem "carrierwave", "~> 2.0"
 gem "devise"
 gem "devise-i18n"
+gem "kaminari"
 gem "mini_magick"
 gem "rails-i18n", "~> 6.0"
-gem 'kaminari'
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
