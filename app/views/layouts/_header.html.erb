@@ -1,17 +1,29 @@
-<% if user_signed_in? %>
-  <%# ログイン時 %>
-  <%= link_to 'ホーム', root_path %>
-  <%= link_to "みんなの感想", posts_path %>
-  <%= link_to "感想を投稿", new_post_path %>
-  <%= link_to '聖地MAP', "/maps/index" %>
-  <%= link_to '聖地リスト', spots_path %>
-  <%= link_to "アカウント編集", edit_user_registration_path %>
-  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "ログアウトしますか？" } %>
-  <%= "【名前】#{current_user.name}" %>
-<% else %>
-  <%# 非ログイン時 %>
-  <%= link_to 'ホーム', root_path %>
-  <%= link_to "新規登録", new_user_registration_path %>
-  <%= link_to "ログイン", new_user_session_path %>
-  <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, method: :post %>
-<% end %>
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <a class="navbar-brand" href="#">
+    <%= link_to image_tag("yorimoi.png"), root_path %>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <% if user_signed_in? %>
+          <%# ログイン時 %>
+          <li><%= link_to '聖地MAP', "/maps/index", class: "nav-link text-white" %></li>
+          <li><%= link_to '聖地リスト', spots_path, class: "nav-link text-white" %></li>
+          <li><%= link_to "みんなの感想", posts_path, class: "nav-link text-white" %></li>
+          <li><%= link_to "アカウント編集", edit_user_registration_path, class: "nav-link text-white" %></li>
+          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "ログアウトしますか？" }, class: "nav-link text-white" %></li>
+        <% else %>
+          <%# 非ログイン時 %>
+          <li><%= link_to "新規登録", new_user_registration_path, class: "nav-link text-white" %></li>
+          <li><%= link_to "ログイン", new_user_session_path, class: "nav-link text-white" %></li>
+          <li><%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, method: :post, class: "nav-link text-white" %></li>
+        <% end %>
+      </li>
+
+    </ul>
+  </div>
+</nav>
