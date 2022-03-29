@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+<nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top">
   <a class="navbar-brand" href="#">
     <%= link_to image_tag("yorimoi.png"), root_path %>
   </a>
@@ -14,6 +14,7 @@
           <li><%= link_to '聖地MAP', "/maps/index", class: "nav-link text-white" %></li>
           <li><%= link_to '聖地リスト', spots_path, class: "nav-link text-white" %></li>
           <li><%= link_to "みんなの感想", posts_path, class: "nav-link text-white" %></li>
+          <li><%= link_to '感想を投稿する', new_post_path, class: "nav-link text-white" %></li>
           <li><%= link_to "アカウント編集", edit_user_registration_path, class: "nav-link text-white" %></li>
           <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "ログアウトしますか？" }, class: "nav-link text-white" %></li>
         <% else %>
@@ -23,7 +24,6 @@
           <li><%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, method: :post, class: "nav-link text-white" %></li>
         <% end %>
       </li>
-
     </ul>
   </div>
 </nav>

@@ -7,7 +7,7 @@
 
 <% if @spot.image_2? %>
   <h2>アニメとの比較画像</h2>
-  <p><%= image_tag @spot.image_2.url %></p>
+  <p><%= image_tag @spot.image_2.url, class: "img-fluid" %></p>
 <% end %>
 
 <p>※このサイトでは「宇宙よりも遠い場所」の作品画像を比較目的のために引用しております。画像の著作権は『©YORIMOI PARTNERS』にあります。</p>
@@ -40,8 +40,12 @@
 
 <h3>コメントする</h3>
 <%= form_with model: [@spot, @spot_user], local: true do |f| %>
-  <p><%= f.text_area :comment %></p>
+  <div class="form-group">
+    <p><%= f.text_area :comment, class: "form-control" %></p>
+  </div>
   <p>写真を選ぶ</p>
   <p><%= f.file_field :image %></p>
-  <%= f.submit "投稿する" %>
+    <div>
+  <%= f.submit "投稿する", class: "btn btn-primary btn-block" %>
+    </div>
 <% end %>

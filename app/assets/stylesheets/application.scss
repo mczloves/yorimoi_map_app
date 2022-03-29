@@ -23,18 +23,31 @@
   @extend .alert-danger;
 }
 
-body {
-  min-height:100vh ;
-  position: relative;
+/***** 全体設定 *****/
+.base-container {
+  @extend .container-fluid;
+  max-width: var(--breakpoint-lg);
+  padding: 30px 15px;
 }
 
+/* 全体画面（フッターの余白を埋める） */
+body {
+  padding-top: 56px;
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+
 footer {
-  footer {
-    background-color: blue;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    margin-top: auto;
-  }
+  background-color: blue;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-top: 32px;
 }
 
 /***** フッター 戻るボタン *****/
