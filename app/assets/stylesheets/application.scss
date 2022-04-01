@@ -40,6 +40,7 @@ body {
 
 main {
   flex: 1;
+  background-color: #CCFFFF;
 }
 
 
@@ -47,7 +48,6 @@ footer {
   background-color: blue;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  margin-top: 32px;
 }
 
 /***** フッター 戻るボタン *****/
@@ -57,7 +57,7 @@ footer {
   position: fixed;
   right: 100px;
   bottom: 20px;
-  background: #ba2636;
+  background: #bab026;
   opacity: 0.6;
 }
 
@@ -93,4 +93,11 @@ footer {
   #page_top{
   right: 0px;
   }
+}
+
+/*** カードごとのスペースを設定 ***/
+.card {
+  margin: 0 auto 60px;
+  max-width: 376px;
+  height: 370px;
 }

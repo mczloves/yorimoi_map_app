@@ -1,12 +1,10 @@
-<div>
-  <p>【名前】 <%= post.user.name %></p>
-  <p>【投稿日】<%= post.set_date %></p>
-  <p>【タイトル】 <%= post.title %></p>
-  <p>【感想】 <%= simple_format(h(post.content)) %></p>
+<div class="col-12 col-md-6 col-lg-4">
+  <div class="card border-success mb-3">
+    <div class="card-body">
+    <h3 class="card-header"><%= post.title %></h3>
+    <p class="card-header">【名前】 <%= post.user.name %></p>
+    <p class="card-header"><%= post.set_date %></p>
 
-  <% if post.image? %>
-    <p><%= image_tag post.image.url %></p>
-  <% end %>
 
   <% if current_user %>
   <p id="post-<%= post.id %>">
@@ -22,11 +20,12 @@
   
 
   <p>
-    <%= link_to "詳細", post %>
+    <%= link_to "詳細", post, class: "btn btn-sm btn-primary" %>
     <% if current_user && current_user.id == post.user_id %>
-      <%= link_to "編集", edit_post_path(post) %>
-      <%= link_to "削除", post_path(post), method: :delete, data: { confirm: "削除しますか？" } %>
+      <%= link_to "編集", edit_post_path(post), class: "btn btn-sm btn-success"  %>
+      <%= link_to "削除", post_path(post), method: :delete, class: "btn btn-sm btn-danger", data: { confirm: "削除しますか？" } %>
     <% end %>
   </p>
+    </div>
+  </div>
 </div>
-<hr>
