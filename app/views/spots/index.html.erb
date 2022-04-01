@@ -12,8 +12,7 @@
     </div>
 </div>
 <%= paginate @spots %>
------>
-
+--------------------------------------------
 <div class="texts-wrapper">
   <div class="contents-title">
     <h1 class="text-center">聖地リスト</h1>
@@ -28,6 +27,31 @@
                 <% if spot.image? %>
                   <p><%= image_tag spot.image.url, class: "img-fluid" %></p>
                 <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+ <%= paginate @spots %>
+
+ ----->
+<div class="texts-wrapper">
+  <div class="contents-title">
+    <h1 class="text-center">聖地リスト</h1>
+    <div class="row">
+      <% @spots.each do |spot| %>
+        <div class="col-12 col-md-6 col-lg-4">
+          <%= link_to spot_path(spot) do %>
+            <div class="card bg-light mb-3">
+              <% if spot.image? %>
+                  <p><%= image_tag spot.image.url, class: "img-fluid card-img-top" %></p>
+                <% end %>
+              <div class="card-body">
+                <h4 class="card-title"><%= spot.name %></h4>
+                <p class="card-text"><%= spot.address %></p>
               </div>
             </div>
           <% end %>

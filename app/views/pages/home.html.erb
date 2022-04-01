@@ -1,9 +1,18 @@
-<h1>よりもいMAP</h1>
-<h2><%= link_to '聖地MAPを見る', "/maps/index" %></h2>
-<h2><%= link_to '聖地リストを見る', spots_path %></h2>
-<h2><%= link_to '聖地巡礼の感想を見る', posts_path %></h2>
-<h2><%= link_to '感想を投稿する', new_post_path %></h2>
-<h2><%= link_to 'ストリートビューを見る(聖地リストから選んでください)', spots_path %></h2>
+<div class='top-wrapper'>
+  <div class="top-inner-text top-text">
+    <h1 class='text-white font-weight-bold  mt-3 mb-3'>そうだ</h1>
+    <h1 class='text-white font-weight-bold mt-3 mb-3'>聖地</h1>
+    <h1 class='text-white font-weight-bold mt-3 mb-3'>行こう。</h1>
+  </div>
+</div>
+
+
+<h1 class="text-center">よりもいMAP</h1>
+<h2><%= link_to '聖地MAPを見る', "/maps/index", class: "btn btn-warning btn-block" %></h2>
+<h2><%= link_to '聖地リストを見る', spots_path, class: "btn btn-warning btn-block" %></h2>
+<h2><%= link_to '聖地巡礼の感想を見る', posts_path, class: "btn btn-warning btn-block" %></h2>
+<h2><%= link_to '感想を投稿する', new_post_path, class: "btn btn-warning btn-block" %></h2>
+<h2><%= link_to 'ストリートビューを見る(聖地リストから選んでください)', spots_path, class: "btn btn-warning btn-block" %></h2>
 
 <% if user_signed_in? %>
   <p>聖地巡礼を楽しもう！<p>
