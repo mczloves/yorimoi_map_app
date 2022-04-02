@@ -3,9 +3,7 @@
 <div class="row">
 
   <div class="col-12 col-md-6 col-lg-6">
-    <% if @post.image? %>
-      <p><%= image_tag @post.image.url, class: "img-fluid img-thumbnail" %></p>
-    <% end %>
+    <p><%= image_tag @post.image.url, class: "img-fluid img-thumbnail" %></p>
   </div>
 
   <div class="col-12 col-md-6 col-lg-6">

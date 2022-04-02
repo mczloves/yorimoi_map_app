@@ -48,10 +48,10 @@
             <div class="card bg-light mb-3">
               <% if spot.image? %>
                   <p><%= image_tag spot.image.url, class: "img-fluid card-img-top" %></p>
-                <% end %>
+              <% end %>
               <div class="card-body">
-                <h4 class="card-title"><%= spot.name %></h4>
-                <p class="card-text"><%= spot.address %></p>
+                <h5 class="card-title"><%= spot.name %></h5>
+                <p class="card-title small"><%= spot.address %></p>
               </div>
             </div>
           <% end %>

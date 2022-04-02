@@ -10,7 +10,7 @@
     <h4 class="text-center">情報</h4>
     <table class="table table-bordered table-striped mt-1">
       <tr><th>名前</th><td class="break-word"><%= @spot.name %></td></tr>
-      <tr><th>住所</th><td class="break-word"><%= @spot.address %></td></tr>
+      <tr><th class="table-success">住所</th><td class="break-word table-success"><%= @spot.address %></td></tr>
       <tr><th>紹介</th><td class="break-word"><%= simple_format(h(@spot.body)) %></td></tr>
     </table>
   </div>
@@ -28,7 +28,7 @@
 <% end %>
 </div>
 
-<p><%= link_to 'GoogleMapを見る', @spot.url, target: :_blank, rel: "noopener noreferrer", class: "btn btn-block btn-primary" %></p>
+<p class="mt-3"><%= link_to 'GoogleMapを見る', @spot.url, target: :_blank, rel: "noopener noreferrer", class: "btn btn-block btn-primary" %></p>
 <p><%= link_to '聖地リストへ戻る', spots_path, class: "btn btn-block btn-warning" %></p>
 
 
