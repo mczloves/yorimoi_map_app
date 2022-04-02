@@ -1,10 +1,12 @@
 <div class="col-12 col-md-6 col-lg-4">
-  <div class="card border-success mb-3">
+  <div class="card bg-light mb-3">
+    <p><%= image_tag post.image.url, class: "img-fluid" %></p>
     <div class="card-body">
-    <h3 class="card-header"><%= post.title %></h3>
-    <p class="card-header">【名前】 <%= post.user.name %></p>
-    <p class="card-header"><%= post.set_date %></p>
-
+      <h3 class="card-title"><%= post.title %></h3>
+      <p class="card-title"><%= post.user.name %></p>
+      <p class="card-body small"><%= post.set_date %></p>
+    </div>
+  </div>
 
   <% if current_user %>
   <p id="post-<%= post.id %>">
@@ -26,6 +28,4 @@
       <%= link_to "削除", post_path(post), method: :delete, class: "btn btn-sm btn-danger", data: { confirm: "削除しますか？" } %>
     <% end %>
   </p>
-    </div>
-  </div>
 </div>
