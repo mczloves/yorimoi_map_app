@@ -14,8 +14,10 @@
  *= require_self
  */
  @import "bootstrap/scss/bootstrap";
+ @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap');
+ 
 
- .alert-notice {
+.alert-notice {
   @extend .alert-success;
 }
 
@@ -36,13 +38,13 @@ body {
   display: flex;
   flex-flow: column;
   min-height: 100vh;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
 main, header{
   flex: 1;
   background-color: #CCFFFF;
 }
-
 
 
 footer {
@@ -144,6 +146,7 @@ img.top-image {
     height: 160px;
     }
 }
+
 /*** ストリートビュー ***/
 .iframe-wrap {
   position: relative;
@@ -162,4 +165,9 @@ img.top-image {
     height:100%;
     border:none;
     display:block;
+}
+
+/*** ページネーション中央揃え ***/
+.pagination {
+  justify-content: center;
 }
