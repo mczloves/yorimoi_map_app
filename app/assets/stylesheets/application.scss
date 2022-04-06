@@ -173,3 +173,18 @@ img.top-image {
 .pagination {
   justify-content: center;
 }
+
+/*** いいねボタン ***/
+.heart{
+  color: #E0548E;
+}
+
+.dislike-heart{
+  color: #E0548E;
+}
+
+.heart:hover,
+.dislike-heart:hover{
+  color: red;
+  text-decoration: none;
+}

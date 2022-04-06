@@ -1,2 +1,4 @@
-<%= link_to "★", post_likes_path(post), method: :delete, remote: true %>
+<%= link_to post_likes_path(post), {method: :delete, remote: true, class: "heart"} do %>
+  <i class="fa fa-heart"></i>
+<% end %>
 <%= post.likes_count %>
