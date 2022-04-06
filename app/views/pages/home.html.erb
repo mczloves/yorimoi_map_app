@@ -6,29 +6,33 @@
   </div>
 </div>
 
-
 <h1 class="text-center">よりもいMAP</h1>
 <%= link_to "/maps/index", class: "btn btn-warning btn-block" do %>
-  <h3><i class="fa-solid fa-location-dot home-icon"></i> 聖地MAP</h3>
+  <h3><i class="fa-solid fa-location-dot home-icon"></i> 聖地巡礼を開始</h3>
+  <div class="small">MAPが表示されます。</div>
 <% end %>
 
 <%= link_to spots_path, class: "btn btn-warning btn-block" do %>
   <h3><i class="fa-solid fa-landmark home-icon"></i> 聖地リスト</h3>
+  <div class="small">アニメとの比較画像が見れます。</div>
 <% end %>
 
 <%= link_to posts_path, class: "btn btn-warning btn-block" do %>
-  <h3><i class="fa-solid fa-book-open home-icon"></i> 聖地巡礼の感想</h3>
+  <h3><i class="fa-solid fa-book-open home-icon"></i> みんなの感想</h3>
+  <div class="small">聖地巡礼の感想が見れます。</div>
 <% end %>
 
 <%= link_to new_post_path, class: "btn btn-warning btn-block" do %>
   <h3><i class="fa-solid fa-pen home-icon"></i> 感想を投稿</h3>
+  <div class="small">写真を撮って感想を投稿してみよう！</div>
 <% end %>
 
 <%= link_to spots_path, class: "btn btn-warning btn-block" do %>
   <h3><i class="fa-solid fa-street-view home-icon"></i> ストリートビュー</h3>
-  <div class="small">聖地リストから選択して下さい。</div>
+  <div class="small">見たい聖地を選択して下さい。</div>
 <% end %>
 
+<!---
 <% if user_signed_in? %>
   <p>聖地巡礼を楽しもう！<p>
 <% else %>
@@ -40,3 +44,4 @@
     <li>遠方にお住まいの方もストリートビューで聖地を見ることができる</li>
   </ol>
 <% end %>
+--->
