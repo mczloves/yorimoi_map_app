@@ -14,7 +14,7 @@
           <li><%= link_to '聖地MAP', "/maps/index", class: "nav-link text-white" %></li>
           <li><%= link_to '聖地リスト', spots_path, class: "nav-link text-white" %></li>
           <li><%= link_to "みんなの感想", posts_path, class: "nav-link text-white" %></li>
-          <li><%= link_to '感想を投稿する', new_post_path, class: "nav-link text-white" %></li>
+          <li><%= link_to '感想を投稿', new_post_path, class: "nav-link text-white" %></li>
           <li><%= link_to "アカウント編集", edit_user_registration_path, class: "nav-link text-white" %></li>
           <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "ログアウトしますか？" }, class: "nav-link text-white" %></li>
         <% else %>

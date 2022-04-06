@@ -25,7 +25,7 @@
         <%= @post.likes.count %>
       </p>
     <% else %>
-      ☆ <%= @post.likes.count %>
+      <i class="far fa-heart"></i> <%= @post.likes.count %>
     <% end %>
 
     <% if current_user && current_user.id == @post.user_id %>
