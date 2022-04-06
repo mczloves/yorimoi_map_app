@@ -14,7 +14,6 @@
  *= require_self
  */
  @import "bootstrap/scss/bootstrap";
- @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&display=swap');
  
 
 .alert-notice {
@@ -38,14 +37,13 @@ body {
   display: flex;
   flex-flow: column;
   min-height: 100vh;
-  font-family: 'M PLUS Rounded 1c', sans-serif;
+  font-family: 'Noto Sans JP', sans-serif;
 }
 
 main, header{
   flex: 1;
   background-color: #CCFFFF;
 }
-
 
 footer {
   background-color: blue;
@@ -108,7 +106,8 @@ footer {
 
 /*** TOPページ背景 ***/
 .top-wrapper {
-  background-image: image-url("home.png");
+  /*** background-image: image-url("home.png"); ***/
+  background: linear-gradient(to top, rgba(217, 175, 217, 0.7) 0%, rgba(151, 217, 225, 0.7) 100%),url("home.png");
   background-repeat: no-repeat;
   background-size: cover;
   height: calc(100vh - 74px);
