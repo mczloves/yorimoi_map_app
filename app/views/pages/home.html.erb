@@ -8,11 +8,26 @@
 
 
 <h1 class="text-center">よりもいMAP</h1>
-<h2><%= link_to '聖地MAPを見る', "/maps/index", class: "btn btn-warning btn-block" %></h2>
-<h2><%= link_to '聖地リストを見る', spots_path, class: "btn btn-warning btn-block" %></h2>
-<h2><%= link_to '聖地巡礼の感想を見る', posts_path, class: "btn btn-warning btn-block" %></h2>
-<h2><%= link_to '感想を投稿する', new_post_path, class: "btn btn-warning btn-block" %></h2>
-<h2><%= link_to 'ストリートビューを見る(聖地リストから選んでください)', spots_path, class: "btn btn-warning btn-block" %></h2>
+<%= link_to "/maps/index", class: "btn btn-warning btn-block" do %>
+  <h3><i class="fa-solid fa-location-dot"></i> 聖地MAP</h3>
+<% end %>
+
+<%= link_to spots_path, class: "btn btn-warning btn-block" do %>
+  <h3><i class="fa-solid fa-landmark"></i> 聖地リスト</h3>
+<% end %>
+
+<%= link_to posts_path, class: "btn btn-warning btn-block" do %>
+  <h3><i class="fa-solid fa-book-open"></i> 聖地巡礼の感想</h3>
+<% end %>
+
+<%= link_to new_post_path, class: "btn btn-warning btn-block" do %>
+  <h3><i class="fa-solid fa-pen"></i> 感想を投稿</h3>
+<% end %>
+
+<%= link_to spots_path, class: "btn btn-warning btn-block" do %>
+  <h3><i class="fa-solid fa-street-view"></i> ストリートビューを見る</h3>
+  <div class="small">聖地リストから選択して下さい。</div>
+<% end %>
 
 <% if user_signed_in? %>
   <p>聖地巡礼を楽しもう！<p>
