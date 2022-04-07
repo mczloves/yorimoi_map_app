@@ -6,8 +6,8 @@
   </div>
 </div>
 
-<h1 class="text-center">よりもいMAP</h1>
-<%= link_to "/maps/index", class: "btn btn-warning btn-block" do %>
+
+<%= link_to "/maps/index", class: "btn btn-warning btn-block mt-3" do %>
   <h3><i class="fa-solid fa-location-dot home-icon"></i> 聖地巡礼を開始</h3>
   <div class="small">MAPが表示されます。</div>
 <% end %>
@@ -30,4 +30,14 @@
 <%= link_to spots_path, class: "btn btn-warning btn-block" do %>
   <h3><i class="fa-solid fa-street-view home-icon"></i> ストリートビュー</h3>
   <div class="small">見たい聖地を選択して下さい。</div>
+<% end %>
+
+<% if user_signed_in? %>
+  <h3 class="text-center mt-3">さあ、聖地巡礼を楽しもう！</h3>
+<% else %>
+  <div class="text-center text-lg-start mt-3">
+    <%= link_to "新規登録", new_user_registration_path, class: 'btn btn-outline-info rounded-pill' %>
+    <%= link_to "簡単ログイン", users_guest_sign_in_path, method: :post, class: 'btn btn-outline-success rounded-pill' %>
+    <%= link_to "ログイン", new_user_session_path, class: 'btn btn-outline-info rounded-pill' %>
+  </div>
 <% end %>
