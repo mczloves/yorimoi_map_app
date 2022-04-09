@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
   end
 
-  root "pages#home"
+  root "homes#index"
   get "maps/index"
   resources :posts do
     resource :likes, only: [:create, :destroy]
@@ -26,7 +26,4 @@ Rails.application.routes.draw do
     resource :comments, only: [:create, :destroy]
   end
 
-  # resources :spots do
-  # resource :spot_users, only: [:create, :destroy]
-  # end
 end
