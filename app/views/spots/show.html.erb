@@ -1,4 +1,4 @@
-<h1 class="text-center bg-success rounded">聖地詳細</h1>
+<h2 class="text-center font-weight-bold pege-title">聖地詳細</h2>
 <div class="row">
   <div class="col-12 col-md-6 col-lg-6">
     <% if @spot.image_2? %>
@@ -19,7 +19,7 @@
 
 <p class="small">※このサイトでは「宇宙よりも遠い場所」の作品画像を比較目的のために引用しております。画像の著作権は『©YORIMOI PARTNERS』にあります。</p>
 
-<h2 class="text-center bg-success rounded">ストリートビュー<h2>
+<h2 class="text-center font-weight-bold pege-title">ストリートビュー<h2>
 <div class="iframe-wrap">
 <% if @spot.street_view.present? %>
   <%= @spot.street_view.html_safe %>
