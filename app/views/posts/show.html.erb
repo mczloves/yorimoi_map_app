@@ -22,7 +22,6 @@
         <% else %>
           <%= render "dislike", post: @post %>
         <% end %>
-        <%= @post.likes.count %>
       </p>
     <% else %>
       <i class="far fa-heart"></i> <%= @post.likes.count %>
@@ -39,7 +38,6 @@
 
 <h2>みんなのコメント</h2>
 <hr>
-
 <% @post.comments.each do |comment| %>
   <p class="text-info"><%= comment.user.name %></p>
   <p><%= simple_format(h(comment.body)) %></p>
@@ -59,8 +57,3 @@
   </div>
 <% end %>
 <p><%= link_to "感想一覧へ", :back, class: "btn btn-warning btn-block" %></p>
-
-<!--
-<%= link_to "戻る", :back, class: "btn btn-danger btn-block" %>
-<p><%= link_to "感想一覧へ", posts_path, class: "btn btn-warning btn-block" %></p>
--->

@@ -21,11 +21,11 @@
 
 <h2 class="text-center font-weight-bold pege-title">ストリートビュー<h2>
 <div class="iframe-wrap">
-<% if @spot.street_view.present? %>
-  <%= @spot.street_view.html_safe %>
-<% else %>
-  <p>この聖地にはストリートビューがありません<p>
-<% end %>
+  <% if @spot.street_view.present? %>
+    <%= @spot.street_view.html_safe %>
+  <% else %>
+    <p>この聖地にはストリートビューがありません<p>
+  <% end %>
 </div>
 
 <p class="mt-3"><%= link_to 'GoogleMapを見る', @spot.url, target: :_blank, rel: "noopener noreferrer", class: "btn btn-block btn-primary" %></p>
