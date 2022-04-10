@@ -19,6 +19,7 @@ class SpotUsersController < ApplicationController
   end
 
   private
+
   def spot_user_params
     params.require(:spot_user).permit(:comment, :image, :spot_id, :user_id)
   end

@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :spots, only: [:index, :show] do
-    resource :spot_users, only: [:create, :destroy]
-  end
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -18,12 +15,14 @@ Rails.application.routes.draw do
 
   root "homes#index"
   get "maps/index"
-  resources :posts do
-    resource :likes, only: [:create, :destroy]
-  end
 
   resources :posts do
+    resource :likes, only: [:create, :destroy]
     resource :comments, only: [:create, :destroy]
+  end
+
+  resources :spots, only: [:index, :show] do
+    resource :spot_users, only: [:create, :destroy]
   end
 
 end
