@@ -1,11 +1,23 @@
-<h1>聖地リスト</h1>
-<% @spots.each do |spot| %>
-  <p>【聖地名】 <%= spot.name %></p>
-  <p>【住所】 <%= spot.address %></p>
-  <% if spot.image? %>
-    <p><%= image_tag spot.image.url %></p>
-  <% end %>
-  <%= link_to 'この聖地を詳しく見る', spot_path(spot) %>
-  <hr>
-<% end %>
-<%= paginate @spots %>
+<div class="texts-wrapper">
+  <div class="contents-title">
+    <h2 class="text-center font-weight-bold pege-title">聖地リスト</h2>
+    <div class="row">
+      <% @spots.each do |spot| %>
+        <div class="col-12 col-md-6 col-lg-4">
+          <%= link_to spot_path(spot) do %>
+            <div class="card bg-light mb-3">
+              <% if spot.image? %>
+                  <p><%= image_tag spot.image.url, class: "img-fluid card-img-top" %></p>
+              <% end %>
+              <div class="card-body">
+                <h5 class="card-title text-dark"><%= spot.name %></h5>
+          <% end %>
+                <p class="card-title small"><i class="fa-solid fa-location-dot"></i> <%= spot.address %></p>
+              </div>
+            </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+ <%= paginate @spots %>

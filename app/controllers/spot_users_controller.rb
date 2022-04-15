@@ -7,9 +7,7 @@ class SpotUsersController < ApplicationController
     if @spot_user.save
       redirect_to @spot, notice: "コメントを書き込みました。"
     else
-      # flash.now[:alert] = "投稿に失敗しました"
       redirect_to spot_path(@spot), notice: "コメントを入力して下さい"
-      # redirect_back fallback_location: root_path
     end
   end
 

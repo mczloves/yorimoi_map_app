@@ -1,7 +1,6 @@
-<h1>聖地巡礼を開始!</h1>
-<h3>聖地をピンで表示してます📍</h3>
-<h4>訪れた聖地は写真を撮って投稿してみよう！ <%= link_to '感想投稿する', new_post_path %></h4>
-
+<h2 class="text-center font-weight-bold pege-title">聖地巡礼 開始！</h2>
+<h3 class="text-center">聖地をピンで表示してます<i class="fa-solid fa-map-pin map-pin"></i></h3>
+<p class="text-center">訪れた聖地は写真を撮って投稿してみよう！ <%= link_to '感想投稿する', new_post_path, class: "btn btn-sm btn-primary" %></p>
 
 <div id='map'></div>
 
@@ -303,5 +302,6 @@ function markerEvent(i) {
 }
 
 
+
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdl73EKmSBk_irpjYlVEv-Cd72LzDgcY4&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLE_MAPS_API_KEY']%>&callback=initMap" async defer></script>

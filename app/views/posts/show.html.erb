@@ -1,47 +1,58 @@
-<h1>感想詳細</h1>
-<p>【名前】 <%= @post.user.name %></p>
-<p>【投稿日】<%= @post.set_date %></p>
-<p>【タイトル】 <%= @post.title %></p>
-<p>【感想内容】 <%= simple_format(h(@post.content)) %></p>
-<% if @post.image? %>
-  <p><%= image_tag @post.image.url %></p>
-<% end %>
+<h2 class="text-center font-weight-bold pege-title">感想</h2>
 
-<% if current_user %>
-<p id="post-<%= @post.id %>">
-  <% if @post.liked_by?(current_user) %>
-    <%= render "like", post: @post %>
-  <% else %>
-    <%= render "dislike", post: @post %>
-  <% end %>
-  <%= @post.likes.count %>
-</p>
-<% else %>
-  ☆ <%= @post.likes.count %>
-<% end %>
+<div class="row">
 
-<% if current_user && current_user.id == @post.user_id %>
-  <p>
-    <%= link_to "編集", edit_post_path(@post) %>
-    <%= link_to "削除", post_path(@post), method: :delete, data: { confirm: "削除しますか？" } %>
-  </p>
-<% end %>
-<p><%= link_to "投稿一覧へ", posts_path %></p>
+  <div class="col-12 col-md-6 col-lg-6">
+    <p class="text-center"><%= image_tag @post.image.url, class: "img-fluid img-thumbnail" %></p>
+  </div>
+
+  <div class="col-12 col-md-6 col-lg-6">
+
+    <table class="table table-bordered table-striped mt-1">
+      <tr><th>名前</th><td class="break-word"><%= @post.user.name %></td></tr>
+      <tr><th>投稿日</th><td class="break-word"><%= @post.set_date %></td></tr>
+      <tr><th>タイトル</th><td class="break-word"><%= @post.title %></td></tr>
+      <tr><th>感想</th><td class="break-word"><%= simple_format(h(@post.content)) %></td></tr>
+    </table>
+
+    <% if current_user %>
+      <p id="post-<%= @post.id %>">
+        <% if @post.liked_by?(current_user) %>
+          <%= render "like", post: @post %>
+        <% else %>
+          <%= render "dislike", post: @post %>
+        <% end %>
+      </p>
+    <% else %>
+      <i class="far fa-heart"></i> <%= @post.likes.count %>
+    <% end %>
+
+    <% if current_user && current_user.id == @post.user_id %>
+      <p><%= link_to "編集", edit_post_path(@post), class: "btn btn-primary btn-block" %></p>
+      <p><%= link_to "削除", post_path(@post), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger btn-block" %></p>
+    <% end %>
+
+  </div>
+</div>
 
 <h2>みんなのコメント</h2>
 <hr>
-
 <% @post.comments.each do |comment| %>
-  <p>名前: <%= comment.user.name %></p>
-  <p>コメント<%= simple_format(h(comment.body)) %></p>
+  <p class="text-info"><%= comment.user.name %></p>
+  <p><%= simple_format(h(comment.body)) %></p>
 <% if current_user && current_user.id == comment.user_id %>
-  <%= link_to '削除する', post_comments_path(post_id: @post, id: comment.id), method: :delete, data: {confirm: "コメントを削除しますか？"} %>
+  <%= link_to '削除する', post_comments_path(post_id: @post, id: comment.id), method: :delete, data: {confirm: "コメントを削除しますか？"}, class: "btn btn-danger" %>
 <% end %>
 <hr>
 <% end %>
 
 <h3>コメントを書き込む</h3>
 <%= form_with model: [@post, @comment], local: true do |f| %>
-  <p><%= f.text_area :body %></p>
-  <%= f.submit "送信する" %>
+  <div class="form-group">
+    <p><%= f.text_area :body, class: "form-control" %></p>
+  </div>
+  <div>
+    <p><%= f.submit "コメントする", class: "btn btn-primary btn-block" %></p>
+  </div>
 <% end %>
+<p><%= link_to "感想一覧へ", :back, class: "btn btn-warning btn-block" %></p>

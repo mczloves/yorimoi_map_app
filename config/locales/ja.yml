@@ -13,3 +13,10 @@ ja:
     time:
       formats:
         default: "%Y年%-m月%-d日(%a) %-H時%-M分%-S秒"
+  views:
+    pagination:
+      first: "&laquo; 最初"
+      last: "最後 &raquo;"
+      next: "次 &rsaquo;"
+      previous: "&lsaquo; 前"
+      truncate: "&hellip;"

@@ -1,47 +1,59 @@
-<h1>聖地詳細</h1>
+<h2 class="text-center font-weight-bold pege-title">聖地詳細</h2>
+<div class="row">
+  <div class="col-12 col-md-6 col-lg-6">
+    <% if @spot.image_2? %>
+    <h4 class="text-center">アニメとの比較画像</h4>
+      <p><%= image_tag @spot.image_2.url, class: "img-fluid img-thumbnail" %></p>
+    <% end %>
+  </div>
+  <div class="col-12 col-md-6 col-lg-6">
+    <h4 class="text-center">情報</h4>
+    <table class="table table-bordered table-striped mt-1">
+      <tr><th>名前</th><td class="break-word"><%= @spot.name %></td></tr>
+      <tr><th class="table-success">住所</th><td class="break-word table-success"><%= @spot.address %></td></tr>
+      <tr><th>紹介</th><td class="break-word"><%= simple_format(h(@spot.body)) %></td></tr>
+    </table>
+  </div>
+<div>
 
-<p>【聖地名】<%= @spot.name %></p>
-<p>【住所】<%= @spot.address %></p>
-<p>【聖地の紹介】<%= simple_format(h(@spot.body)) %></p>
+<p class="small">※このサイトでは「宇宙よりも遠い場所」の作品画像を比較目的のために引用しております。画像の著作権は『©YORIMOI PARTNERS』にあります。</p>
 
+<h2 class="text-center font-weight-bold pege-title">ストリートビュー<h2>
+<div class="iframe-wrap">
+  <% if @spot.street_view.present? %>
+    <%= @spot.street_view.html_safe %>
+  <% else %>
+    <p>この聖地にはストリートビューがありません<p>
+  <% end %>
+</div>
 
-<% if @spot.image_2? %>
-  <h2>アニメとの比較画像</h2>
-  <p><%= image_tag @spot.image_2.url %></p>
-<% end %>
+<p class="mt-3"><%= link_to 'GoogleMapを見る', @spot.url, target: :_blank, rel: "noopener noreferrer", class: "btn btn-block btn-primary" %></p>
+<p><%= link_to '聖地リストへ戻る', :back, class: "btn btn-block btn-warning" %></p>
 
-<p>※このサイトでは「宇宙よりも遠い場所」の作品画像を比較目的のために引用しております。画像の著作権は『©YORIMOI PARTNERS』にあります。</p>
-
-<h2>ストリートビュー<h2>
-<% if @spot.street_view.present? %>
-  <%= @spot.street_view.html_safe %>
-<% else %>
-  <p>この聖地にはストリートビューがありません<p>
-<% end %>
-
-<h2><%= link_to 'GoogleMapを見る', @spot.url, target: :_blank, rel: "noopener noreferrer" %></h2>
-<h2><%= link_to '聖地リストへ戻る', spots_path %></h2>
-
-
+<hr>
 <h2>コメント一覧</h2>
 <% @spot.spot_users.each do |spot_user| %>
-  <p>名前 : <%= spot_user.user.name %></p>
-  <p>内容 :<%= simple_format(h(spot_user.comment)) %></p>
+  <p class="text-info"><%= spot_user.user.name %></p>
+  <p><%= simple_format(h(spot_user.comment)) %></p>
 
   <% if spot_user.image? %>
-    <p><%= image_tag spot_user.image.url %></p>
+    <p><%= image_tag spot_user.image.url, class: "img-fluid" %></p>
   <% end %>
 
   <% if current_user && current_user.id == spot_user.user_id %>
-    <%= link_to '削除する', spot_spot_users_path(spot_id: @spot, id: spot_user.id), method: :delete, data: {confirm: "コメントを削除しますか？"} %>
+    <%= link_to '削除する', spot_spot_users_path(spot_id: @spot, id: spot_user.id), method: :delete, data: {confirm: "コメントを削除しますか？"}, class: "btn btn-danger" %>
   <% end %>
 <hr>
 <% end %>
 
 <h3>コメントする</h3>
 <%= form_with model: [@spot, @spot_user], local: true do |f| %>
-  <p><%= f.text_area :comment %></p>
-  <p>写真を選ぶ</p>
+  <div class="form-group">
+    <p><%= f.text_area :comment, class: "form-control" %></p>
+  </div>
+  <p>写真</p>
   <p><%= f.file_field :image %></p>
-  <%= f.submit "投稿する" %>
+    <div>
+  <%= f.submit "投稿する", class: "btn btn-primary btn-block" %>
+    </div>
 <% end %>
